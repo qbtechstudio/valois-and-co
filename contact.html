@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Global Enclaves Map | VALOIS & CO. Luxury Real Estate</title>
+  
+  <meta name="description" content="Initiate confidential dialogue with Valois & Co. Executive Partners. Explore our interactive geospatial map of ultra-prime sanctuaries worldwide.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d4af37'>V</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Project Stylesheets -->
+  <script src="js/theme-init.js"></script>
+  <script src="js/pm-boot.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pro-motion.css">
+</head>
+<body>
+
+  <!-- Top Gold Scroll Progress Bar ("Star Bar") -->
+  <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+
+  <!-- ==========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================== -->
+  <header id="main-header">
+    <div class="container-fluid nav-container">
+      
+      <a href="index.html" class="brand-logo" aria-label="Valois and Co. Home">
+        <div class="brand-crest">V</div>
+        <div class="brand-text">
+          <span class="brand-name">Valois & Co.</span>
+          <span class="brand-sub">Private Estates</span>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links" id="main-nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link">Residences</a></li>
+          <li><a href="about.html" class="nav-link">About & Advisors</a></li>
+          <li><a href="calculator.html" class="nav-link">Financing</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact & Map</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" class="btn-theme-toggle" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+
+        <div class="currency-select-wrapper" title="Display conversions use indicative rates">
+          <select id="currency-selector" aria-label="Currency Selector">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="AED">AED (د.إ)</option>
+          </select>
+        </div>
+
+        <button class="btn-nav-saved" id="nav-saved-btn" title="View Private Collection" aria-label="Saved Residences">
+          <i class="fa-solid fa-bookmark"></i>
+          <span class="saved-count-badge">0</span>
+        </button>
+
+        <a href="contact.html" class="btn-vip-tour">
+          <i class="fa-solid fa-compass"></i> Schedule Viewing
+        </a>
+
+        <button class="mobile-toggle" id="mobile-nav-toggle" aria-label="Open Navigation Menu" aria-controls="main-nav-links" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SUBPAGE HERO BANNER
+       ========================================================================== -->
+  <section class="subpage-hero">
+    <div class="subpage-hero-backdrop" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1800&q=80');"></div>
+    <div class="container">
+      <span class="section-pretitle">Discreet Acquisition</span>
+      <h1 class="subpage-hero-title">Confidential Dialogue & Global Enclaves</h1>
+      <p class="subpage-hero-subtitle">
+        Connect with our managing partners for confidential acquisitions, off-market portfolio representation, or schedule an in-person helicopter estate inspection.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE LUXURY MAP SECTION
+       ========================================================================== -->
+  <section id="map-discovery-section" style="padding-top: 60px;">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-pretitle">Cartography of Distinction</span>
+        <h2 class="section-title">Interactive Global Sanctuaries</h2>
+        <p class="section-subtitle">
+          Survey our international portfolio geospatially across the most coveted postcodes on Earth. Click any pin to inspect the property or calculate financing.
+        </p>
+      </div>
+
+      <div class="map-controls-panel">
+        <div class="map-city-pills">
+          <button class="map-city-pill active" type="button" aria-pressed="true" data-city="all">Global View</button>
+          <button class="map-city-pill" type="button" aria-pressed="false" data-city="Beverly Hills">Beverly Hills & LA</button>
+          <button class="map-city-pill" type="button" aria-pressed="false" data-city="Manhattan">Manhattan & Tribeca</button>
+          <button class="map-city-pill" type="button" aria-pressed="false" data-city="Miami">Miami & Star Island</button>
+          <button class="map-city-pill" type="button" aria-pressed="false" data-city="Côte d'Azur">French Riviera</button>
+          <button class="map-city-pill" type="button" aria-pressed="false" data-city="Aspen">Aspen</button>
+          <button class="map-city-pill" type="button" aria-pressed="false" data-city="Dubai">Dubai</button>
+        </div>
+      </div>
+
+      <div class="properties-map-container" id="properties-map" role="region" aria-label="Interactive map of global residences">
+        <div class="map-world-art" aria-hidden="true">
+          <svg viewBox="0 0 1000 500" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="atlas-ocean" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#172338"/><stop offset="1" stop-color="#0b1321"/></linearGradient>
+              <linearGradient id="atlas-land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#334355"/><stop offset="1" stop-color="#202e3c"/></linearGradient>
+              <pattern id="atlas-grain" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#f3e5ab" opacity=".18"/></pattern>
+            </defs>
+            <rect width="1000" height="500" fill="url(#atlas-ocean)"/>
+            <g class="atlas-grid" fill="none" stroke="#d3b763" stroke-opacity=".13" stroke-width="1">
+              <path d="M0 83H1000M0 166H1000M0 250H1000M0 333H1000M0 416H1000"/>
+              <path d="M166 0V500M333 0V500M500 0V500M666 0V500M833 0V500"/>
+              <ellipse cx="500" cy="250" rx="270" ry="500"/><ellipse cx="500" cy="250" rx="430" ry="500"/>
+            </g>
+            <g fill="url(#atlas-land)" stroke="#647586" stroke-opacity=".45" stroke-width="1.5">
+              <path d="M78 119 102 92 147 77 178 61 219 68 240 84 275 88 295 108 326 116 339 137 321 154 302 160 291 180 270 185 258 202 240 204 228 224 207 217 198 197 179 189 165 168 143 165 127 150 104 148 91 135Z"/>
+              <path d="M222 225 242 219 259 234 272 258 266 281 282 299 277 320 291 340 279 365 268 393 253 422 239 412 235 386 223 369 218 344 204 321 207 295 196 273 203 249Z"/>
+              <path d="M278 68 293 53 312 60 315 77 300 88Z"/>
+              <path d="M451 120 466 108 486 111 500 104 517 110 530 105 544 113 562 111 575 121 594 122 607 135 599 146 579 144 569 152 552 149 542 160 522 155 507 162 490 153 477 155 460 145 445 143Z"/>
+              <path d="M471 163 491 155 513 162 529 180 536 200 527 222 521 248 507 273 494 293 481 284 476 260 463 242 458 220 449 202 453 181Z"/>
+              <path d="M534 120 552 103 582 96 606 83 641 80 668 90 699 88 726 99 757 98 780 115 806 114 830 130 857 131 876 149 867 167 844 171 829 188 805 190 790 208 768 206 754 224 735 219 716 205 697 207 684 189 661 185 650 168 629 163 613 146 590 148 575 136 555 139Z"/>
+              <path d="M797 205 817 198 835 208 839 224 822 233 804 226Z"/>
+              <path d="M643 184 661 179 678 190 682 206 670 216 655 206Z"/>
+              <path d="M722 305 752 292 783 299 808 315 814 337 800 353 776 360 759 375 738 362 720 349 711 327Z"/>
+              <path d="M870 237 882 230 891 239 888 251 878 255Z"/>
+              <path d="M906 286 914 281 921 288 917 296Z"/>
+            </g>
+            <g fill="url(#atlas-grain)" opacity=".35">
+              <path d="M78 119 102 92 147 77 178 61 219 68 240 84 275 88 295 108 326 116 339 137 321 154 302 160 291 180 270 185 258 202 240 204 228 224 207 217 198 197 179 189 165 168 143 165 127 150 104 148 91 135Z"/>
+              <path d="M222 225 242 219 259 234 272 258 266 281 282 299 277 320 291 340 279 365 268 393 253 422 239 412 235 386 223 369 218 344 204 321 207 295 196 273 203 249Z"/>
+              <path d="M534 120 552 103 582 96 606 83 641 80 668 90 699 88 726 99 757 98 780 115 806 114 830 130 857 131 876 149 867 167 844 171 829 188 805 190 790 208 768 206 754 224 735 219 716 205 697 207 684 189 661 185 650 168 629 163 613 146 590 148 575 136 555 139Z"/>
+            </g>
+            <g fill="#d6c58b" fill-opacity=".65" font-family="Arial,sans-serif" font-size="10" letter-spacing="3">
+              <text x="158" y="286">PACIFIC</text><text x="383" y="270">ATLANTIC</text><text x="787" y="272">INDIAN OCEAN</text>
+            </g>
+          </svg>
+        </div>
+        <div class="map-marker-layer" id="map-marker-layer" aria-label="Property locations"></div>
+        <div class="map-popup-host" id="map-popup-host" aria-live="polite"></div>
+        <div class="map-legend"><span class="map-legend-dot"></span> Valois Collection <span id="map-count-label">0 residences</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VIP CONTACT & PRIVATE VIEWING INQUIRY
+       ========================================================================== -->
+  <section id="contact-vip-section" style="padding: 100px 0;">
+    <div class="container">
+      <div class="contact-card-wrapper">
+        
+        <div class="contact-info-panel">
+          <div>
+            <span class="section-pretitle">Executive Bureau</span>
+            <h3>Global Office Directory</h3>
+            <p>
+              Our executive bureaux are situated in the primary capital centers of private wealth, art auctions, and maritime superyacht culture.
+            </p>
+
+            <div class="office-locations-list">
+              <div class="office-item">
+                <div class="office-icon"><i class="fa-solid fa-landmark"></i></div>
+                <div>
+                  <strong>Beverly Hills Headquarters</strong>
+                  <span>9601 Wilshire Boulevard, Penthouse 12, Beverly Hills, CA 90212</span>
+                </div>
+              </div>
+              <div class="office-item">
+                <div class="office-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div>
+                  <strong>New York Flagship</strong>
+                  <span>767 Fifth Avenue, GM Building 45th Floor, New York, NY 10153</span>
+                </div>
+              </div>
+              <div class="office-item">
+                <div class="office-icon"><i class="fa-solid fa-crown"></i></div>
+                <div>
+                  <strong>Monaco & Riviera Bureau</strong>
+                  <span>Place du Casino, Le Carré d'Or, 98000 Monaco</span>
+                </div>
+              </div>
+              <div class="office-item">
+                <div class="office-icon"><i class="fa-solid fa-sun"></i></div>
+                <div>
+                  <strong>Dubai Executive Salon</strong>
+                  <span>Gate Village 04, DIFC, Dubai, United Arab Emirates</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-confidentiality-note" style="margin-top: 30px; font-size: 0.85rem;">
+            <i class="fa-solid fa-shield-halved"></i> Bilateral Non-Disclosure Agreements (NDA) executed prior to private asset dossier transmissions.
+          </div>
+        </div>
+
+        <div class="contact-form-panel">
+          <form id="vip-contact-form">
+            <div class="vip-form-grid">
+              
+              <div class="vip-form-group">
+                <label for="contact-name">Principal Legal Name</label>
+                <input type="text" id="contact-name" required placeholder="Lord / Ambassador / Dr. / Mr. / Ms.">
+              </div>
+
+              <div class="vip-form-group">
+                <label for="contact-email">Confidential Email</label>
+                <input type="email" id="contact-email" required placeholder="principal@familyoffice.com">
+              </div>
+
+              <div class="vip-form-group">
+                <label for="contact-phone">Encrypted Telephone / Signal</label>
+                <input type="tel" id="contact-phone" required placeholder="+1 (310) ...">
+              </div>
+
+              <div class="vip-form-group">
+                <label for="contact-preferred-advisor">Assigned Advisory Partner</label>
+                <select id="contact-preferred-advisor">
+                  <option value="any">Managing Partner Desk (Any)</option>
+                  <option value="agent-1">Geneviève de Valois (Beverly Hills / Monaco)</option>
+                  <option value="agent-2">Alexander Vance (Manhattan / Aspen)</option>
+                  <option value="agent-3">Soraya Al-Mansoor (Miami / Dubai)</option>
+                </select>
+              </div>
+
+              <div class="vip-form-group">
+                <label for="contact-budget">Capital Allocation Tier</label>
+                <select id="contact-budget">
+                  <option value="20-35m">$20,000,000 - $35,000,000</option>
+                  <option value="35-60m">$35,000,000 - $60,000,000</option>
+                  <option value="60m+">$60,000,000+ Trophy Portfolio</option>
+                  <option value="institutional">Institutional / Sovereign Fund</option>
+                </select>
+              </div>
+
+              <div class="vip-form-group">
+                <label for="contact-modality">Preferred Communication Channel</label>
+                <select id="contact-modality">
+                  <option value="phone">Private Phone Call</option>
+                  <option value="encrypted-mail">Encrypted Email Dossier</option>
+                  <option value="in-person">In-Person Meeting (Private Salon)</option>
+                  <option value="whatsapp">Encrypted WhatsApp</option>
+                </select>
+              </div>
+
+              <div class="vip-form-group form-full">
+                <label for="contact-message">Acquisition Preferences & Specifications</label>
+                <textarea id="contact-message" rows="4" placeholder="Detail desired locations, superyacht slip specs, architectural style, or specific sanctuary reference..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-vip-submit">
+                Transmit Confidential Dossier
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal: Property Detail -->
+  <div class="luxury-modal-container" id="property-detail-modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop-overlay"></div>
+    <div class="modal-dialog-box">
+      <button class="modal-close-btn" aria-label="Close dialog">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="property-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Drawer: Private Collection -->
+  <aside class="saved-collection-drawer" id="saved-collection-drawer" aria-label="Private Collection Drawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-bookmark"></i> Private Collection</h3>
+      <button class="drawer-close-btn" aria-label="Close Private Collection">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="drawer-body" id="saved-drawer-items"></div>
+    <div style="padding: 20px; border-top: 1px solid var(--border-light);">
+      <a href="contact.html" class="btn-luxury-gold" style="display:block; text-align:center;" onclick="window.app.closeSavedDrawer()">
+        Inquire on Collection
+      </a>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Component -->
+  <div class="luxury-toast" id="luxury-toast" role="status" aria-live="polite">
+    <div class="toast-icon"><i class="fa-solid fa-shield-halved"></i></div>
+    <div class="toast-content">
+      <div class="toast-title">Notification</div>
+      <div class="toast-message">Action processed successfully.</div>
+    </div>
+  </div>
+
+  <button class="btn-back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-crest">V</div>
+            <div class="brand-text">
+              <span class="brand-name">Valois & Co.</span>
+              <span class="brand-sub">Private Estates</span>
+            </div>
+          </div>
+          <p>
+            An independent international brokerage devoted to the curation and stewardship of extraordinary architectural properties worldwide.
+          </p>
+          <div class="footer-socials">
+            <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-instagram"></i></span>
+            <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-linkedin-in"></i></span>
+            <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-youtube"></i></span>
+            <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-weixin"></i></span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Pages Directory</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="properties.html">Residences Portfolio</a></li>
+            <li><a href="about.html">About & Advisory Team</a></li>
+            <li><a href="calculator.html">Mortgage & Financing</a></li>
+            <li><a href="contact.html">Contact & Global Map</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Global Enclaves</h4>
+          <ul class="footer-links-list">
+            <li><a href="properties.html">Beverly Hills & Bel Air</a></li>
+            <li><a href="properties.html">Tribeca & Central Park</a></li>
+            <li><a href="properties.html">Star Island, Miami</a></li>
+            <li><a href="properties.html">Cap-Ferrat, Côte d'Azur</a></li>
+            <li><a href="properties.html">Red Mountain, Aspen</a></li>
+            <li><a href="properties.html">Palm Jumeirah, Dubai</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col newsletter-box">
+          <h4>The Valois Journal</h4>
+          <p>Quarterly intelligence on ultra-prime real estate economics and architectural private collections.</p>
+          <form class="newsletter-form">
+            <input type="email" aria-label="Your email address" placeholder="Your executive email..." required>
+            <button type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 Valois & Co. Luxury Real Estate LLC. All rights reserved. Equal Housing Opportunity.</div>
+        <div>Licensed Real Estate Brokerage in California, New York, Florida, and Monaco.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="js/properties-data.js"></script>
+  <script src="js/agents-data.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pro-motion.js"></script>
+
+</body>
+</html>

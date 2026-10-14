@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth & Mortgage Financing Calculator | VALOIS & CO. Luxury Real Estate</title>
+  
+  <meta name="description" content="Calculate and structure super-prime real estate debt financing, amortization, and sovereign carrying costs with the Valois & Co. Private Wealth Calculator.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d4af37'>V</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Project Stylesheets -->
+  <script src="js/theme-init.js"></script>
+  <script src="js/pm-boot.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pro-motion.css">
+</head>
+<body>
+
+  <!-- Top Gold Scroll Progress Bar ("Star Bar") -->
+  <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+
+  <!-- ==========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================== -->
+  <header id="main-header">
+    <div class="container-fluid nav-container">
+      
+      <a href="index.html" class="brand-logo" aria-label="Valois and Co. Home">
+        <div class="brand-crest">V</div>
+        <div class="brand-text">
+          <span class="brand-name">Valois & Co.</span>
+          <span class="brand-sub">Private Estates</span>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links" id="main-nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link">Residences</a></li>
+          <li><a href="about.html" class="nav-link">About & Advisors</a></li>
+          <li><a href="calculator.html" class="nav-link active">Financing</a></li>
+          <li><a href="contact.html" class="nav-link">Contact & Map</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" class="btn-theme-toggle" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+
+        <div class="currency-select-wrapper" title="Display conversions use indicative rates">
+          <select id="currency-selector" aria-label="Currency Selector">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="AED">AED (د.إ)</option>
+          </select>
+        </div>
+
+        <button class="btn-nav-saved" id="nav-saved-btn" title="View Private Collection" aria-label="Saved Residences">
+          <i class="fa-solid fa-bookmark"></i>
+          <span class="saved-count-badge">0</span>
+        </button>
+
+        <a href="contact.html" class="btn-vip-tour">
+          <i class="fa-solid fa-compass"></i> Schedule Viewing
+        </a>
+
+        <button class="mobile-toggle" id="mobile-nav-toggle" aria-label="Open Navigation Menu" aria-controls="main-nav-links" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SUBPAGE HERO BANNER
+       ========================================================================== -->
+  <section class="subpage-hero">
+    <div class="subpage-hero-backdrop" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80');"></div>
+    <div class="container">
+      <span class="section-pretitle">Private Capital & Debt Advisory</span>
+      <h1 class="subpage-hero-title">Mortgage & Wealth Financing Calculator</h1>
+      <p class="subpage-hero-subtitle">
+        Model super-prime financing structures, amortization horizons, sovereign tax implications, and monthly carrying dues in real-time.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CALCULATOR DASHBOARD SECTION
+       ========================================================================== -->
+  <section id="mortgage-calculator-section" style="padding-top: 60px;">
+    <div class="container">
+
+      <div class="calc-dashboard-grid">
+        <!-- Inputs Column -->
+        <div class="calc-inputs-column">
+          <!-- Home Price Input & Slider -->
+          <div class="calc-field-group">
+            <div class="field-label-row">
+              <label for="calc-price-input">Sanctuary Acquisition Price</label>
+              <div class="field-numeric-display"><span class="calc-currency-symbol">$</span><span id="display-price-numeric">28,500,000</span></div>
+            </div>
+            <div class="input-with-symbol calc-money-input">
+              <span class="calc-currency-symbol">$</span>
+              <input type="text" id="calc-price-input" value="28,500,000">
+            </div>
+            <input type="range" id="calc-price-slider" class="custom-range-slider" min="1000000" max="60000000" step="500000" value="28500000">
+          </div>
+
+          <!-- Down Payment Dual Field -->
+          <div class="calc-row-dual">
+            <div class="calc-field-group">
+              <div class="field-label-row">
+                <label for="calc-down-percent">Down Payment (%)</label>
+              </div>
+              <div class="input-with-symbol calc-money-input">
+                <span>%</span>
+                <input type="number" id="calc-down-percent" value="20" min="5" max="80">
+              </div>
+              <input type="range" id="calc-down-slider" class="custom-range-slider" min="5" max="80" step="1" value="20">
+            </div>
+
+            <div class="calc-field-group">
+              <div class="field-label-row">
+                <label for="calc-down-amount">Down Payment Amount</label>
+              </div>
+              <div class="input-with-symbol">
+                <span class="calc-currency-symbol">$</span>
+                <input type="text" id="calc-down-amount" value="5,700,000">
+              </div>
+            </div>
+          </div>
+
+          <!-- Interest Rate & Term -->
+          <div class="calc-row-dual">
+            <div class="calc-field-group">
+              <div class="field-label-row">
+                <label for="calc-interest-input">Annual Interest Rate (%)</label>
+              </div>
+              <div class="input-with-symbol">
+                <span>%</span>
+                <input type="number" id="calc-interest-input" value="5.85" step="0.05" min="2" max="15">
+              </div>
+              <input type="range" id="calc-interest-slider" class="custom-range-slider" min="2.0" max="12.0" step="0.05" value="5.85">
+            </div>
+
+            <div class="calc-field-group">
+              <div class="field-label-row">
+                <label for="calc-term-select">Financing Horizon</label>
+              </div>
+              <div class="filter-dropdown">
+                <select id="calc-term-select">
+                  <option value="30">30-Year Fixed Term</option>
+                  <option value="15">15-Year Fixed Term</option>
+                  <option value="10">10-Year ARM / Jumbo</option>
+                  <option value="5">5-Year Bridge / Private Facility</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- HOA & Carrying Fees -->
+          <div class="calc-field-group">
+            <div class="field-label-row">
+              <label for="calc-hoa-input">Monthly HOA & Private Security Dues</label>
+            </div>
+            <div class="input-with-symbol calc-money-input">
+              <span class="calc-currency-symbol">$</span>
+              <input type="text" id="calc-hoa-input" value="3,200">
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Breakdown & Donut Chart Column -->
+        <div class="calc-breakdown-card">
+          <div class="chart-visual-wrapper">
+            <svg class="donut-svg" width="200" height="200" viewBox="0 0 180 180">
+              <circle class="donut-bg" cx="90" cy="90" r="70" stroke-width="16" fill="transparent"></circle>
+              <circle id="donut-principal" class="donut-seg" cx="90" cy="90" r="70" stroke-width="16" stroke="#d4af37" fill="transparent"></circle>
+              <circle id="donut-tax" class="donut-seg" cx="90" cy="90" r="70" stroke-width="16" stroke="#38bdf8" fill="transparent"></circle>
+              <circle id="donut-insurance" class="donut-seg" cx="90" cy="90" r="70" stroke-width="16" stroke="#34d399" fill="transparent"></circle>
+              <circle id="donut-hoa" class="donut-seg" cx="90" cy="90" r="70" stroke-width="16" stroke="#c084fc" fill="transparent"></circle>
+            </svg>
+            <div class="chart-center-metric">
+              <span>Estimated Monthly</span>
+              <strong id="calc-monthly-total">$164,280</strong>
+            </div>
+          </div>
+
+          <div class="calc-breakdown-legend">
+            <div class="legend-item">
+              <div><span class="legend-color-dot color-principal"></span>Principal & Interest</div>
+              <span class="legend-val" id="calc-principal-interest">$134,280</span>
+            </div>
+            <div class="legend-item">
+              <div><span class="legend-color-dot color-tax"></span>Property Tax (Est. 1.15%)</div>
+              <span class="legend-val" id="calc-property-tax">$27,312</span>
+            </div>
+            <div class="legend-item">
+              <div><span class="legend-color-dot color-insurance"></span>Homeowners Insurance</div>
+              <span class="legend-val" id="calc-insurance">$8,312</span>
+            </div>
+            <div class="legend-item">
+              <div><span class="legend-color-dot color-hoa"></span>HOA & Estate Maintenance</div>
+              <span class="legend-val" id="calc-hoa-display">$3,200</span>
+            </div>
+          </div>
+
+          <div class="loan-summary-pills">
+            <div class="pill-col">
+              <span>Total Loan Capital</span>
+              <strong id="calc-loan-amount">$22,800,000</strong>
+            </div>
+            <div class="pill-col">
+              <span>Total Interest Over Term</span>
+              <strong id="calc-total-interest">$25,540,800</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Private Banking Consultation Banner -->
+      <div style="margin-top: 60px; padding: 40px; background: var(--bg-secondary); border: 1px solid var(--gold-border); border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
+        <div style="max-width: 640px;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 8px;">Private Banking & Lombard Credit Lines</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">
+            Our wealth partners structure bespoke liquidity facilities against liquid portfolios, cryptocurrencies, and international holdings with competitive institutional spreads.
+          </p>
+        </div>
+        <a href="contact.html" class="btn-luxury-gold">
+          Request Wealth Counsel
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Drawer: Private Collection -->
+  <aside class="saved-collection-drawer" id="saved-collection-drawer" aria-label="Private Collection Drawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-bookmark"></i> Private Collection</h3>
+      <button class="drawer-close-btn" aria-label="Close Private Collection">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="drawer-body" id="saved-drawer-items"></div>
+    <div style="padding: 20px; border-top: 1px solid var(--border-light);">
+      <a href="contact.html" class="btn-luxury-gold" style="display:block; text-align:center;" onclick="window.app.closeSavedDrawer()">
+        Inquire on Collection
+      </a>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Component -->
+  <div class="luxury-toast" id="luxury-toast" role="status" aria-live="polite">
+    <div class="toast-icon"><i class="fa-solid fa-shield-halved"></i></div>
+    <div class="toast-content">
+      <div class="toast-title">Notification</div>
+      <div class="toast-message">Action processed successfully.</div>
+    </div>
+  </div>
+
+  <button class="btn-back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-crest">V</div>
+            <div class="brand-text">
+              <span class="brand-name">Valois & Co.</span>
+              <span class="brand-sub">Private Estates</span>
+            </div>
+          </div>
+          <p>
+            An independent international brokerage devoted to the curation and stewardship of extraordinary architectural properties worldwide.
+          </p>
+          <div class="footer-socials">
+            <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-instagram"></i></span>
+            <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-linkedin-in"></i></span>
+            <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-youtube"></i></span>
+            <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-weixin"></i></span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Pages Directory</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="properties.html">Residences Portfolio</a></li>
+            <li><a href="about.html">About & Advisory Team</a></li>
+            <li><a href="calculator.html">Mortgage & Financing</a></li>
+            <li><a href="contact.html">Contact & Global Map</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Global Enclaves</h4>
+          <ul class="footer-links-list">
+            <li><a href="properties.html">Beverly Hills & Bel Air</a></li>
+            <li><a href="properties.html">Tribeca & Central Park</a></li>
+            <li><a href="properties.html">Star Island, Miami</a></li>
+            <li><a href="properties.html">Cap-Ferrat, Côte d'Azur</a></li>
+            <li><a href="properties.html">Red Mountain, Aspen</a></li>
+            <li><a href="properties.html">Palm Jumeirah, Dubai</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col newsletter-box">
+          <h4>The Valois Journal</h4>
+          <p>Quarterly intelligence on ultra-prime real estate economics and architectural private collections.</p>
+          <form class="newsletter-form">
+            <input type="email" aria-label="Your email address" placeholder="Your executive email..." required>
+            <button type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 Valois & Co. Luxury Real Estate LLC. All rights reserved. Equal Housing Opportunity.</div>
+        <div>Licensed Real Estate Brokerage in California, New York, Florida, and Monaco.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="js/properties-data.js"></script>
+  <script src="js/agents-data.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pro-motion.js"></script>
+
+</body>
+</html>

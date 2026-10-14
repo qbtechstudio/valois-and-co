@@ -1,0 +1,592 @@
+/* ==========================================================================
+   VALOIS & CO. - ULTRA-LUXURY ANIMATION ENGINE
+   High-Fidelity Transitions, Keyframes, Scroll Reveals & Micro-Interactions
+   ========================================================================== */
+
+/* ==========================================================================
+   1. KEYFRAME ANIMATIONS
+   ========================================================================== */
+
+/* Ambient Floating Luminous Orbs */
+@keyframes floatAura {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(60px, -40px) scale(1.15);
+    opacity: 0.28;
+  }
+  100% {
+    transform: translate(-40px, 30px) scale(0.95);
+    opacity: 0.18;
+  }
+}
+
+/* Shimmer Light Beam Across Metallic Gold */
+@keyframes goldBeam {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Pulsing Radar Sonar (Virtual 3D Tours & Map Pins) */
+@keyframes radarSonar {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Subtle Floating Breathing */
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Gold Border Shimmer Gradient */
+@keyframes borderShimmer {
+  0% {
+    border-color: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.05);
+  }
+  50% {
+    border-color: rgba(212, 175, 55, 0.7);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+  }
+  100% {
+    border-color: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.05);
+  }
+}
+
+/* Cinematic Scale-Up for Modals */
+@keyframes modalZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Star Rating Sparkle */
+@keyframes starTwinkle {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.4));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.9));
+    transform: scale(1.18);
+  }
+}
+
+/* Toast Progress Countdown */
+@keyframes toastProgress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* Badge Pulse Animation */
+@keyframes badgeGlowPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+/* ==========================================================================
+   2. SCROLL REVEAL UTILITIES (INTERSECTION OBSERVER DRIVEN)
+   ========================================================================== */
+
+.reveal-init {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-init.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fade.revealed {
+  opacity: 1;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.93);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger Delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* ==========================================================================
+   3. LUXURY BUTTONS & HOVER EFFECTS (SHIMMER WIPE)
+   ========================================================================== */
+
+.btn-vip-tour,
+.btn-luxury-gold,
+.btn-hero-submit,
+.btn-submit-booking,
+.btn-vip-submit {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-vip-tour::before,
+.btn-luxury-gold::before,
+.btn-hero-submit::before,
+.btn-submit-booking::before,
+.btn-vip-submit::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 80%
+  );
+  transform: rotate(35deg) translateX(-150%);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.btn-vip-tour:hover::before,
+.btn-luxury-gold:hover::before,
+.btn-hero-submit:hover::before,
+.btn-submit-booking:hover::before,
+.btn-vip-submit:hover::before {
+  transform: rotate(35deg) translateX(150%);
+}
+
+/* Luxury Card Glass Flare on Hover */
+.card-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-media::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.85s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.property-card:hover .card-media::after,
+.featured-card:hover .card-media::after {
+  left: 140%;
+}
+
+/* ==========================================================================
+   4. INTERACTIVE 3D PERSPECTIVE LIFT ON CARDS
+   ========================================================================== */
+
+.property-card,
+.featured-card,
+.agent-card,
+.testimonial-card,
+.value-card {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.property-card:hover,
+.featured-card:hover {
+  transform: translateY(-10px) scale(1.012);
+  border-color: var(--gold-primary);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 25px rgba(212, 175, 55, 0.22);
+}
+
+.agent-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold-primary);
+  box-shadow: 0 25px 45px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* ==========================================================================
+   5. AMBIENT GLOW ORBS & BACKGROUND LIGHTING
+   ========================================================================== */
+
+.ambient-glow-orb {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.12;
+  animation: floatAura 22s infinite alternate ease-in-out;
+}
+
+.orb-gold {
+  background: radial-gradient(circle, #d4af37 0%, transparent 70%);
+  top: 10%;
+  right: 5%;
+}
+
+.orb-sapphire {
+  background: radial-gradient(circle, #38bdf8 0%, transparent 70%);
+  bottom: 15%;
+  left: 5%;
+  animation-duration: 28s;
+  animation-direction: alternate-reverse;
+}
+
+/* ==========================================================================
+   6. 3D VIRTUAL TOUR SCANNER HUD ANIMATION
+   ========================================================================== */
+
+.virtual-tour-placeholder {
+  position: relative;
+}
+
+.virtual-tour-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  margin-top: -70px;
+  margin-left: -70px;
+  border-radius: 50%;
+  border: 2px dashed rgba(212, 175, 55, 0.4);
+  animation: rotateSpinner 15s linear infinite;
+  pointer-events: none;
+}
+
+.virtual-tour-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  margin-left: -50px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.15);
+  animation: radarSonar 2.8s infinite cubic-bezier(0, 0.2, 0.8, 1);
+  pointer-events: none;
+}
+
+@keyframes rotateSpinner {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   7. TOAST NOTIFICATION PROGRESS BAR
+   ========================================================================== */
+
+.luxury-toast {
+  position: fixed;
+  overflow: hidden;
+}
+
+.toast-progress-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--gold-gradient);
+  width: 100%;
+}
+
+.luxury-toast.show .toast-progress-line {
+  animation: toastProgress 4.5s linear forwards;
+}
+
+/* ==========================================================================
+   8. MODAL CINEMATIC ENTRANCE
+   ========================================================================== */
+
+.luxury-modal-container.active .modal-dialog-box {
+  animation: modalZoomIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Lightbox Photo Scale In */
+.luxury-lightbox-overlay.active .lightbox-img-wrapper img {
+  animation: modalZoomIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   9. STAR RATING BAR GLOW EFFECT
+   ========================================================================== */
+
+.star-rating-bar:hover i {
+  animation: starTwinkle 1.2s infinite ease-in-out;
+}
+
+.star-rating-bar i:nth-child(1) { animation-delay: 0.1s; }
+.star-rating-bar i:nth-child(2) { animation-delay: 0.2s; }
+.star-rating-bar i:nth-child(3) { animation-delay: 0.3s; }
+.star-rating-bar i:nth-child(4) { animation-delay: 0.4s; }
+.star-rating-bar i:nth-child(5) { animation-delay: 0.5s; }
+
+/* ==========================================================================
+   10. MAP PIN PULSING ANIMATION
+   ========================================================================== */
+
+.pin-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -12px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.5);
+  animation: radarSonar 2.2s infinite ease-out;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ==========================================================================
+   11. NUMBER COUNTER PULSE
+   ========================================================================== */
+
+.counter-pulse {
+  animation: counterPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes counterPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); color: var(--gold-hover); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal-init,
+  .reveal-fade,
+  .reveal-scale,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+}
+
+/* ========================================================================
+   12. EDITORIAL ENTRANCE, ACCESSIBLE FEEDBACK & FINISHING DETAILS
+   ======================================================================== */
+
+@keyframes editorialRise {
+  from { opacity: 0; transform: translate3d(0, 22px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes softFocusIn {
+  from { opacity: 0; filter: blur(5px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+.hero-pretitle,
+.hero-title,
+.hero-subtitle,
+.hero-search-card,
+.hero-stats-ribbon {
+  animation: editorialRise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-title { animation-delay: 90ms; }
+.hero-subtitle { animation-delay: 170ms; }
+.hero-search-card { animation-delay: 250ms; }
+.hero-stats-ribbon { animation-delay: 330ms; }
+
+.hero-title span {
+  animation: softFocusIn 1s 180ms both;
+}
+
+.toast-progress-line {
+  display: block;
+  pointer-events: none;
+}
+
+.btn-theme-toggle:focus-visible,
+.btn-nav-saved:focus-visible,
+.mobile-toggle:focus-visible,
+.btn-vip-tour:focus-visible,
+.btn-luxury-gold:focus-visible,
+.btn-hero-submit:focus-visible,
+.btn-submit-booking:focus-visible,
+.btn-vip-submit:focus-visible,
+.view-toggle-btn:focus-visible,
+.map-city-pill:focus-visible,
+.social-icon:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 5px rgba(212, 175, 55, 0.16);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.12);
+}
+
+.property-card,
+.featured-card,
+.agent-card,
+.value-card,
+.testimonial-card {
+  backface-visibility: hidden;
+}
+
+.nav-links.mobile-open .nav-link {
+  animation: editorialRise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.nav-links.mobile-open li:nth-child(2) .nav-link { animation-delay: 45ms; }
+.nav-links.mobile-open li:nth-child(3) .nav-link { animation-delay: 90ms; }
+.nav-links.mobile-open li:nth-child(4) .nav-link { animation-delay: 135ms; }
+.nav-links.mobile-open li:nth-child(5) .nav-link { animation-delay: 180ms; }
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-theme-toggle,
+  .btn-nav-saved,
+  .view-toggle-btn,
+  .map-city-pill,
+  .social-icon {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.25s ease,
+                border-color 0.25s ease,
+                background-color 0.25s ease,
+                box-shadow 0.25s ease;
+  }
+
+  .btn-nav-saved:hover,
+  .view-toggle-btn:hover,
+  .map-city-pill:hover,
+  .social-icon:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 768px) {
+  .ambient-glow-orb {
+    width: 280px;
+    height: 280px;
+    filter: blur(90px);
+  }
+
+  .reveal-init,
+  .reveal-fade,
+  .reveal-scale,
+  .reveal-left,
+  .reveal-right {
+    transition-duration: 0.6s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pretitle,
+  .hero-title,
+  .hero-title span,
+  .hero-subtitle,
+  .hero-search-card,
+  .hero-stats-ribbon,
+  .nav-links.mobile-open .nav-link {
+    animation: none !important;
+  }
+}

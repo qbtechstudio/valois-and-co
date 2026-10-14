@@ -1,0 +1,578 @@
+/* ==========================================================================
+   VALOIS & CO. - PRO MOTION LAYER
+   Preloader + page transitions, split-text headings, hero parallax & gold
+   dust, custom cursor, magnetic buttons, card spotlight, press marquee,
+   staggered reveals. Progressive enhancement: everything here is gated
+   behind html.pm-ready (set by js/pm-boot.js) and prefers-reduced-motion.
+   ========================================================================== */
+
+:root {
+  --pm-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --pm-ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --pm-navy: #0a0d14;
+  --pm-gold: #d4af37;
+}
+
+/* ---------- 1. PRELOADER / PAGE CURTAIN ---------- */
+
+/* Instant cover from first paint until JS builds the richer preloader */
+html.pm-preload::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: var(--pm-navy);
+}
+html.pm-locked,
+html.pm-locked body { overflow: hidden; }
+
+#pm-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: all;
+  visibility: visible;
+}
+#pm-preloader.pm-done { pointer-events: none; }
+
+.pm-pre-panel {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50.5%;
+  background: var(--pm-navy);
+  transition: transform 0.95s var(--pm-ease-in-out);
+  will-change: transform;
+}
+.pm-pre-panel.top { top: 0; }
+.pm-pre-panel.bottom { bottom: 0; }
+.pm-pre-panel.top::after,
+.pm-pre-panel.bottom::after {
+  content: '';
+  position: absolute;
+  left: 0; width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pm-gold), transparent);
+  opacity: 0.55;
+}
+.pm-pre-panel.top::after { bottom: 0; }
+.pm-pre-panel.bottom::after { top: 0; }
+
+#pm-preloader.pm-opening .pm-pre-panel.top { transform: translateY(-101%); }
+#pm-preloader.pm-opening .pm-pre-panel.bottom { transform: translateY(101%); }
+
+/* closing (leaving a page): panels start off-screen then slide shut */
+#pm-preloader.pm-closing-init .pm-pre-panel.top { transform: translateY(-101%); transition: none; }
+#pm-preloader.pm-closing-init .pm-pre-panel.bottom { transform: translateY(101%); transition: none; }
+#pm-preloader.pm-closing .pm-pre-panel { transition: transform 0.6s var(--pm-ease-in-out); }
+
+.pm-pre-core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  color: var(--pm-gold);
+  transition: opacity 0.45s ease, transform 0.6s var(--pm-ease);
+}
+#pm-preloader.pm-opening .pm-pre-core { opacity: 0; transform: scale(1.08); }
+#pm-preloader.pm-closing-init .pm-pre-core { opacity: 0; }
+#pm-preloader.pm-closing .pm-pre-core { opacity: 1; transition-delay: 0.25s; }
+
+.pm-pre-crest {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-brand, 'Cinzel', serif);
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--pm-gold);
+}
+.pm-pre-crest svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.pm-pre-crest rect {
+  fill: rgba(212, 175, 55, 0.06);
+  stroke: var(--pm-gold);
+  stroke-width: 1.5;
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: pmDraw 1.1s var(--pm-ease) 0.1s forwards;
+}
+.pm-pre-crest b {
+  font-weight: 700;
+  opacity: 0;
+  animation: pmFadeUp 0.7s var(--pm-ease) 0.55s forwards;
+}
+.pm-pre-name {
+  display: flex;
+  gap: 0.3em;
+  font-family: var(--font-brand, 'Cinzel', serif);
+  font-size: 0.82rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #f3e5ab;
+}
+.pm-pre-name span {
+  opacity: 0;
+  animation: pmFadeUp 0.6s var(--pm-ease) forwards;
+}
+.pm-pre-bar {
+  width: 160px;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.2);
+  overflow: hidden;
+}
+.pm-pre-bar i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--pm-gold), #f9e29d);
+  transform: translateX(-100%);
+  animation: pmBar 1.5s var(--pm-ease-in-out) 0.2s forwards;
+}
+#pm-preloader.pm-quick .pm-pre-name,
+#pm-preloader.pm-quick .pm-pre-bar { display: none; }
+
+@keyframes pmDraw { to { stroke-dashoffset: 0; } }
+@keyframes pmBar { to { transform: translateX(0); } }
+@keyframes pmFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* hold the hero's own entrance until the curtain has opened */
+html.pm-ready:not(.pm-loaded) .hero-pretitle,
+html.pm-ready:not(.pm-loaded) .hero-title,
+html.pm-ready:not(.pm-loaded) .hero-title span,
+html.pm-ready:not(.pm-loaded) .hero-subtitle,
+html.pm-ready:not(.pm-loaded) .hero-search-card,
+html.pm-ready:not(.pm-loaded) .hero-stats-ribbon {
+  animation-play-state: paused;
+}
+
+/* ---------- 2. SPLIT-TEXT HEADINGS ---------- */
+
+html.pm-ready .hero-title,
+html.pm-ready .hero-title span { animation: none; }
+
+pm-w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.04em 0.07em 0.16em;
+  margin: -0.04em -0.07em -0.16em;
+}
+pm-wi {
+  display: inline-block;
+  transform: translate3d(0, 112%, 0) rotate(4deg);
+  transform-origin: 0 100%;
+  opacity: 0;
+  transition: transform 1.05s var(--pm-ease), opacity 0.7s ease;
+  transition-delay: calc(var(--i, 0) * 55ms + var(--pm-base, 0ms));
+  will-change: transform;
+}
+.pm-split.pm-in pm-wi { transform: none; opacity: 1; }
+
+/* gold italic word group: paint the gradient per word, with a slow shimmer */
+.hero-title .pm-split-gold,
+.hero-title span.pm-split-gold {
+  background: none;
+  -webkit-text-fill-color: initial;
+}
+.pm-gold pm-wi {
+  background: linear-gradient(110deg, #a8821c 15%, #f9e29d 38%, #fff4c9 50%, #f9e29d 62%, #a8821c 85%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: pmShimmer 7s linear infinite;
+}
+.hero-title span.pm-gold { background: none; -webkit-text-fill-color: initial; }
+@keyframes pmShimmer {
+  from { background-position: 160% 0; }
+  to { background-position: -60% 0; }
+}
+
+/* section heading ornaments */
+.section-head .section-pretitle {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  letter-spacing: 0.5em;
+  transition: opacity 0.9s ease, transform 0.9s var(--pm-ease), letter-spacing 1.4s var(--pm-ease);
+}
+.section-head.pm-in .section-pretitle,
+.section-head.revealed .section-pretitle {
+  opacity: 1;
+  transform: none;
+  letter-spacing: inherit;
+}
+html:not(.pm-ready) .section-head .section-pretitle { opacity: 1; transform: none; letter-spacing: inherit; }
+
+.section-head .section-title::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 2px;
+  margin: 22px auto 0;
+  background: linear-gradient(90deg, transparent, var(--pm-gold), transparent);
+  transform: scaleX(0);
+  transition: transform 1.2s var(--pm-ease) 0.35s;
+}
+.section-head.pm-left .section-title::after {
+  margin-left: 0;
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--pm-gold), transparent);
+}
+.section-head.pm-in .section-title::after,
+.section-head.revealed .section-title::after { transform: scaleX(1); }
+html:not(.pm-ready) .section-head .section-title::after { transform: scaleX(1); }
+
+/* subtitles fade in after the title */
+.pm-sub { opacity: 0; transform: translateY(14px); transition: opacity 0.9s ease 0.45s, transform 0.9s var(--pm-ease) 0.45s; }
+.pm-sub.pm-in { opacity: 1; transform: none; }
+
+/* ---------- 3. HERO: PARALLAX, GOLD DUST, SCROLL CUE ---------- */
+
+html.pm-ready .hero-backdrop { top: -10%; height: 120%; }
+html.pm-ready .hero-backdrop,
+html.pm-ready .subpage-hero-backdrop {
+  translate: 0 var(--pm-py, 0px);
+  will-change: translate;
+}
+html.pm-ready .hero-content,
+html.pm-ready .subpage-hero .container {
+  translate: 0 var(--pm-cy, 0px);
+}
+
+.pm-dust {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.6s ease 0.4s;
+}
+html.pm-loaded .pm-dust { opacity: 1; }
+
+.pm-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  translate: -50% 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold-light, #f3e5ab);
+  font-size: 0.66rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0;
+  animation: pmFadeUp 1s var(--pm-ease) 2.2s forwards;
+}
+.pm-scroll-cue::after {
+  content: '';
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(180deg, var(--pm-gold), transparent);
+  transform-origin: top;
+  animation: pmCue 2.2s var(--pm-ease-in-out) infinite;
+}
+@keyframes pmCue {
+  0% { transform: scaleY(0); opacity: 1; }
+  55% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+@media (max-height: 820px), (max-width: 991px) { .pm-scroll-cue { display: none; } }
+
+/* ---------- 4. HEADER ---------- */
+
+html.pm-ready #main-header { transition: var(--transition-smooth), transform 0.55s var(--pm-ease); }
+html.pm-ready #main-header.pm-hidden { transform: translateY(-110%); }
+
+/* ---------- 5. CUSTOM CURSOR ---------- */
+
+.pm-cursor-dot,
+.pm-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform;
+}
+.pm-cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: var(--pm-gold); }
+.pm-cursor-ring {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 1px solid rgba(212, 175, 55, 0.7);
+  display: grid;
+  place-items: center;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #0a0d14;
+  transition: width 0.35s var(--pm-ease), height 0.35s var(--pm-ease), margin 0.35s var(--pm-ease),
+              background-color 0.3s ease, border-color 0.3s ease;
+}
+.pm-cursor-ring span { opacity: 0; transition: opacity 0.2s ease; font-weight: 700; }
+html.pm-cursor-on .pm-cursor-dot,
+html.pm-cursor-on .pm-cursor-ring { opacity: 1; }
+html.pm-cursor-hover .pm-cursor-ring { width: 64px; height: 64px; margin: -32px 0 0 -32px; background: rgba(212, 175, 55, 0.14); }
+html.pm-cursor-view .pm-cursor-ring { width: 84px; height: 84px; margin: -42px 0 0 -42px; background: var(--pm-gold); border-color: var(--pm-gold); }
+html.pm-cursor-view .pm-cursor-ring span { opacity: 1; }
+html.pm-cursor-view .pm-cursor-dot { opacity: 0; }
+html.pm-cursor-down .pm-cursor-ring { transform-origin: center; scale: 0.85; }
+@media (hover: none), (pointer: coarse) { .pm-cursor-dot, .pm-cursor-ring { display: none; } }
+
+/* ---------- 6. BUTTONS: MAGNETIC + RIPPLE ---------- */
+
+.btn-luxury-gold, .btn-luxury-outline, .btn-hero-submit, .btn-vip-tour,
+.btn-submit-booking, .btn-vip-submit {
+  position: relative;
+  overflow: hidden;
+  translate: var(--pm-mx, 0px) var(--pm-my, 0px);
+  transition: all 0.35s var(--pm-ease), translate 0.45s var(--pm-ease);
+}
+.btn-luxury-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 25%, rgba(212, 175, 55, 0.22) 50%, transparent 75%);
+  transform: translateX(-120%);
+  transition: transform 0.8s var(--pm-ease);
+  pointer-events: none;
+}
+.btn-luxury-outline:hover::before { transform: translateX(120%); }
+.pm-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0);
+  animation: pmRipple 0.75s ease-out forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+@keyframes pmRipple { to { transform: scale(1); opacity: 0; } }
+
+/* ---------- 7. CARDS: SPOTLIGHT + IMAGE SETTLE ---------- */
+
+.pm-spot {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(212, 175, 55, 0.13), transparent 60%);
+  mix-blend-mode: normal;
+}
+.pm-spot-host:hover > .pm-spot { opacity: 1; }
+body.light-theme .pm-spot,
+html.theme-light .pm-spot {
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(184, 134, 11, 0.12), transparent 60%);
+}
+
+.revealed .card-media img,
+.card-media.pm-media-in img { animation: pmImgSettle 1.6s var(--pm-ease) both; }
+@keyframes pmImgSettle {
+  from { scale: 1.22; filter: saturate(0.6) brightness(0.8); }
+  to { scale: 1; filter: none; }
+}
+
+/* ---------- 8. STAGGER, STARS, MARQUEE, FOOTER ---------- */
+
+.testimonial-card.revealed .star-rating-bar i {
+  animation: pmStarPop 0.7s var(--pm-ease) backwards;
+}
+.testimonial-card.revealed .star-rating-bar:hover i { animation: starTwinkle 1.2s infinite ease-in-out; }
+.testimonial-card.revealed .star-rating-bar i:nth-child(1) { animation-delay: 0.35s; }
+.testimonial-card.revealed .star-rating-bar i:nth-child(2) { animation-delay: 0.47s; }
+.testimonial-card.revealed .star-rating-bar i:nth-child(3) { animation-delay: 0.59s; }
+.testimonial-card.revealed .star-rating-bar i:nth-child(4) { animation-delay: 0.71s; }
+.testimonial-card.revealed .star-rating-bar i:nth-child(5) { animation-delay: 0.83s; }
+@keyframes pmStarPop {
+  0% { opacity: 0; transform: scale(0.2) rotate(-50deg); filter: drop-shadow(0 0 0 rgba(212, 175, 55, 0)); }
+  60% { opacity: 1; transform: scale(1.35) rotate(8deg); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.95)); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+.pm-marquee {
+  overflow: hidden;
+  padding: 26px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.pm-marquee .pm-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 0;
+  animation: pmMarquee 38s linear infinite;
+}
+.pm-marquee:hover .pm-track { animation-play-state: paused; }
+.pm-marquee .press-mention-wordmark { flex: none; padding: 0 clamp(28px, 4vw, 64px); white-space: nowrap; }
+.pm-marquee .press-mention-wordmark br { display: none; }
+@keyframes pmMarquee { to { transform: translateX(-50%); } }
+
+.pm-rise {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.pm-rise.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Nav link: slightly richer underline motion */
+.nav-link::after { transform-origin: left; }
+.nav-link:not(.active):hover::after { transform-origin: left; }
+
+/* Back-to-top gets a gentle idle float once visible */
+.btn-back-to-top.visible { animation: subtleFloat 3.4s ease-in-out infinite; }
+.btn-back-to-top.visible:hover { animation-play-state: paused; }
+
+/* Scroll progress bar: soft glow */
+.scroll-progress-bar { box-shadow: 0 0 12px rgba(212, 175, 55, 0.65); }
+
+/* ---------- 9. MOBILE + REDUCED MOTION ---------- */
+
+@media (max-width: 768px) {
+  pm-wi { transition-duration: 0.8s; transition-delay: calc(var(--i, 0) * 38ms + var(--pm-base, 0ms)); }
+  .pm-pre-crest { width: 68px; height: 68px; font-size: 1.9rem; }
+  .pm-pre-name { letter-spacing: 0.34em; font-size: 0.7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  pm-wi { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .section-head .section-pretitle,
+  .section-head .section-title::after,
+  .pm-sub, .pm-rise { opacity: 1 !important; transform: none !important; transition: none !important; letter-spacing: inherit; }
+  .pm-dust, .pm-scroll-cue, .pm-cursor-dot, .pm-cursor-ring, #pm-preloader { display: none !important; }
+  .pm-marquee .pm-track { animation: none; }
+  .btn-back-to-top.visible { animation: none; }
+  .revealed .card-media img { animation: none; }
+}
+
+/* Fix: outline CTA stretched across the VIP banner row */
+section[style*="gold-border"] .btn-luxury-outline { flex: 0 0 auto; width: auto; }
+
+/* ==========================================================================
+   LIGHT MODE: HOME HERO READABILITY FIX
+   The hero sits on a photo, so it keeps a dark scrim and light text in both
+   themes; the search card becomes a solid, high-contrast white panel.
+   ========================================================================== */
+html.theme-light .hero-overlay,
+body.light-theme .hero-overlay {
+  background: linear-gradient(180deg, rgba(10, 13, 20, 0.52) 0%, rgba(10, 13, 20, 0.66) 55%, rgba(10, 13, 20, 0.86) 100%);
+}
+html.theme-light .hero-title,
+body.light-theme .hero-title {
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.6);
+}
+html.theme-light .hero-pretitle,
+body.light-theme .hero-pretitle { color: #f3e5ab; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6); }
+html.theme-light .hero-subtitle,
+body.light-theme .hero-subtitle {
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #f8fafc;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
+}
+html.theme-light .hero-search-card,
+body.light-theme .hero-search-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(184, 134, 11, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+html.theme-light .hero-tab-btn,
+body.light-theme .hero-tab-btn { color: #4b5563; }
+html.theme-light .hero-tab-btn.active,
+body.light-theme .hero-tab-btn.active { color: #765800; }
+html.theme-light .hero-search-card .search-field-box label,
+body.light-theme .hero-search-card .search-field-box label { color: #4b5563; }
+html.theme-light .hero-search-card .search-field-box select,
+body.light-theme .hero-search-card .search-field-box select { color: #171a21; }
+html.theme-light .hero-stats-ribbon .stat-number,
+body.light-theme .hero-stats-ribbon .stat-number { color: #f3e5ab; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); }
+html.theme-light .hero-stats-ribbon .stat-label,
+body.light-theme .hero-stats-ribbon .stat-label { color: #e5e7eb; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7); }
+html.theme-light .pm-scroll-cue,
+body.light-theme .pm-scroll-cue { color: #f3e5ab; }
+
+/* Softer gold dust on the bright sub-page heroes in light mode */
+html.theme-light .subpage-hero .pm-dust,
+body.light-theme .subpage-hero .pm-dust { opacity: 0.35 !important; }
+
+/* ==========================================================================
+   LIGHT MODE: DARK PANELS KEEP LIGHT TEXT
+   (calculator results card + home VIP banner are intentionally dark panels)
+   ========================================================================== */
+html.theme-light .calc-breakdown-card,
+body.light-theme .calc-breakdown-card {
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #cbd5e1;
+  --gold-light: #f3e5ab;
+  background: linear-gradient(160deg, #141a2a 0%, #0c1019 100%);
+  color: #f8fafc;
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25);
+}
+html.theme-light .calc-breakdown-card .legend-item,
+body.light-theme .calc-breakdown-card .legend-item { border-bottom-color: rgba(255, 255, 255, 0.12); }
+html.theme-light .calc-breakdown-card .loan-summary-pills,
+body.light-theme .calc-breakdown-card .loan-summary-pills { border-top-color: rgba(255, 255, 255, 0.14); }
+html.theme-light .calc-breakdown-card .donut-bg,
+body.light-theme .calc-breakdown-card .donut-bg { stroke: rgba(255, 255, 255, 0.1); }
+
+html.theme-light section[style*="gold-border"],
+body.light-theme section[style*="gold-border"] { color: #f8fafc; }
+html.theme-light section[style*="gold-border"] h2,
+body.light-theme section[style*="gold-border"] h2 { color: #ffffff; }
+html.theme-light section[style*="gold-border"] p,
+body.light-theme section[style*="gold-border"] p { color: #cbd5e1 !important; }
+html.theme-light section[style*="gold-border"] .section-pretitle,
+body.light-theme section[style*="gold-border"] .section-pretitle { color: #e6ca65; }
+html.theme-light section[style*="gold-border"] .btn-luxury-outline,
+body.light-theme section[style*="gold-border"] .btn-luxury-outline {
+  color: #f3e5ab;
+  border-color: rgba(243, 229, 171, 0.55);
+  background: rgba(255, 255, 255, 0.04);
+}
+html.theme-light section[style*="gold-border"] .btn-luxury-outline:hover,
+body.light-theme section[style*="gold-border"] .btn-luxury-outline:hover { background: rgba(212, 175, 55, 0.18); }
+
+/* ==========================================================================
+   LIGHT MODE: CONTRAST TOUCH-UPS (found by automated contrast audit)
+   ========================================================================== */
+html.theme-light .section-pretitle,
+body.light-theme .section-pretitle,
+html.theme-light .btn-inspect-link,
+body.light-theme .btn-inspect-link { color: #7a5a06; }
+html.theme-light section[style*="gold-border"] .section-pretitle,
+body.light-theme section[style*="gold-border"] .section-pretitle { color: #e6ca65; }
+
+/* Footer is a dark panel in both themes */
+html.theme-light #main-footer .brand-sub,
+body.light-theme #main-footer .brand-sub { color: #c9a74a; }
+html.theme-light #main-footer p,
+body.light-theme #main-footer p { color: #b4bfce; }
+
+/* scroll cue disappears as soon as the visitor scrolls (never overlaps the stats) */
+.pm-scrolled .pm-scroll-cue { opacity: 0 !important; transition: opacity 0.3s ease; pointer-events: none; }

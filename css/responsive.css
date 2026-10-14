@@ -1,0 +1,707 @@
+/* ==========================================================================
+   VALOIS & CO. - RESPONSIVE STYLESHEET
+   Mobile First & Adaptive Breakpoints
+   ========================================================================== */
+
+/* Large Tablets & Small Desktops (max-width: 1200px) */
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: 3.2rem;
+  }
+
+  .calc-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .modal-grid-body {
+    grid-template-columns: 1fr;
+  }
+
+  .advisor-card-sticky {
+    position: static;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+/* Compact navigation before the desktop header runs out of room */
+@media (max-width: 1200px) {
+  .mobile-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 74px;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: rgba(10, 13, 20, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--gold-border);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+  }
+
+  body.light-theme .nav-links,
+  html.theme-light .nav-links {
+    background: rgba(255, 255, 255, 0.97);
+  }
+
+  .nav-links.mobile-open {
+    height: calc(100vh - 74px);
+    padding: 30px 0;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+  }
+
+  .btn-vip-tour {
+    display: none;
+  }
+}
+
+/* Tablets (max-width: 992px) */
+@media (max-width: 992px) {
+
+  .hero-search-inputs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats-ribbon {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .filter-main-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filter-detailed-bar {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .contact-card-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .modal-metrics-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .property-card.card-list-view {
+    grid-template-columns: 1fr;
+  }
+
+  .property-card.card-list-view .card-media {
+    height: 260px;
+  }
+
+  .properties-map-container {
+    height: 480px;
+  }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .properties-map-container {
+    height: 420px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .subpage-hero {
+    padding: 136px 0 56px;
+  }
+
+  .subpage-hero-title {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+  }
+
+  .subpage-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .featured-grid,
+  .properties-grid,
+  .agents-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-story-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    margin-bottom: 56px;
+  }
+
+  .about-story-img img {
+    height: clamp(260px, 65vw, 400px);
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .testimonial-card {
+    min-width: 0;
+    padding: 24px;
+  }
+
+  .home-standard-section,
+  .about-heritage-section,
+  .advisors-section {
+    padding: 64px 0;
+  }
+
+  .about-stats {
+    gap: 20px;
+  }
+
+  .card-media {
+    height: 240px;
+  }
+
+  .filter-main-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-row-dual {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-dashboard-grid {
+    padding: 20px;
+  }
+
+  .calc-breakdown-card {
+    padding: 20px;
+  }
+
+  .modal-dialog-box {
+    width: 96%;
+    padding: 20px;
+    max-height: 94vh;
+  }
+
+  .modal-luxury-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .modal-header-right {
+    text-align: left;
+    width: 100%;
+  }
+
+  .modal-header-buttons {
+    justify-content: flex-start;
+  }
+
+  .modal-prop-title {
+    font-size: 1.8rem;
+  }
+
+  .modal-prop-price {
+    font-size: 1.6rem;
+  }
+
+  .gallery-main-view {
+    height: 280px;
+  }
+
+  .modal-metrics-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .modal-amenities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proximity-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vip-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info-panel,
+  .contact-form-panel {
+    padding: 24px;
+  }
+
+  .saved-collection-drawer {
+    width: 100%;
+    right: -100%;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .results-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .view-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hero-search-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Small Screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.9rem;
+  }
+
+  .properties-map-container {
+    height: 340px;
+    border-radius: var(--radius-sm);
+  }
+
+  .map-city-pills {
+    gap: 7px;
+  }
+
+  .map-city-pill {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .brand-name {
+    font-size: 1.1rem;
+  }
+
+  .brand-crest {
+    width: 30px;
+    height: 30px;
+    font-size: 0.95rem;
+  }
+
+  .hero-stats-ribbon {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .stat-number {
+    font-size: 1.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #map-discovery-section *,
+  #map-discovery-section *::before,
+  #map-discovery-section *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Shared layout refinements for narrow screens */
+@media (max-width: 1200px) {
+  #main-header,
+  #main-header.scrolled {
+    padding: 12px 0;
+  }
+
+  .nav-container {
+    gap: 12px;
+  }
+
+  .nav-links {
+    top: 68px;
+    height: 0;
+    padding: 0 20px;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .nav-links.mobile-open {
+    height: calc(100vh - 68px);
+    height: calc(100dvh - 68px);
+    padding: 32px 20px;
+  }
+
+  .nav-links li {
+    width: min(100%, 420px);
+    text-align: center;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    padding: 12px 8px;
+    font-size: 1rem;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .mobile-toggle,
+  .btn-theme-toggle,
+  .btn-nav-saved {
+    flex: 0 0 40px;
+    min-width: 40px;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-toggle {
+    display: inline-flex;
+  }
+
+  body.mobile-nav-open {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  .container,
+  .container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  #hero-section {
+    min-height: 0;
+    min-height: 100svh;
+    padding-top: 112px;
+    padding-bottom: 48px;
+  }
+
+  .hero-content {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero-search-card {
+    padding: 18px;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .hero-search-inputs-grid,
+  .hero-search-inputs-grid > *,
+  .search-field-box {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .search-field-box select,
+  .search-field-box input {
+    max-width: 100%;
+  }
+
+  .hero-search-tabs {
+    scrollbar-width: none;
+  }
+
+  .hero-search-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  #featured-section,
+  #properties-section,
+  #agents-section,
+  #map-discovery-section,
+  #about-section,
+  #contact-vip-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .featured-grid,
+  .properties-grid,
+  .agents-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .newsletter-form input {
+    min-width: 0;
+  }
+
+  #hero-section .container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .container,
+  .container-fluid {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .brand-logo {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .brand-name {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .brand-sub {
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+  }
+
+  .brand-crest {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  .currency-select-wrapper {
+    display: none;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .btn-theme-toggle,
+  .btn-nav-saved,
+  .mobile-toggle {
+    flex-basis: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-toggle {
+    font-size: 1.3rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 9vw, 2.5rem);
+    line-height: 1.15;
+  }
+
+  .hero-pretitle {
+    letter-spacing: 2px;
+    font-size: 0.68rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .hero-search-card {
+    padding: 14px;
+  }
+
+  .hero-tab-btn {
+    padding: 10px 12px;
+    font-size: 0.72rem;
+  }
+
+  .featured-grid,
+  .properties-grid,
+  .agents-grid,
+  .footer-top-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .values-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .about-story-grid {
+    gap: 22px;
+    margin-bottom: 44px;
+  }
+
+  .about-story-content h3 {
+    font-size: clamp(1.8rem, 8vw, 2.2rem);
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 14px;
+  }
+
+  .about-stats > div {
+    min-width: 0;
+  }
+
+  .about-stats strong {
+    font-size: 1.7rem;
+  }
+
+  .testimonial-card {
+    padding: 20px 16px;
+  }
+
+  .testimonial-client {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .client-info {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .home-standard-section,
+  .about-heritage-section,
+  .advisors-section {
+    padding: 52px 0;
+  }
+
+  .section-head {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 8vw, 2.2rem);
+  }
+
+  .card-media {
+    height: clamp(210px, 62vw, 280px);
+  }
+
+  .filter-dashboard,
+  .calc-dashboard-grid,
+  .contact-card-wrapper {
+    border-radius: var(--radius-md);
+  }
+
+  .calc-dashboard-grid {
+    padding: 16px;
+  }
+
+  .contact-info-panel,
+  .contact-form-panel {
+    padding: 20px 16px;
+  }
+
+  .vip-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vip-form-grid .form-full,
+  .btn-vip-submit {
+    grid-column: 1;
+  }
+
+  .office-item span,
+  .vip-form-group label {
+    overflow-wrap: anywhere;
+  }
+
+  .properties-map-container {
+    height: 320px;
+  }
+
+  .map-controls-panel {
+    max-width: calc(100% - 24px);
+  }
+
+  .map-city-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .map-city-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .map-city-pill {
+    flex: 0 0 auto;
+  }
+
+  .modal-dialog-box {
+    width: 100%;
+    max-height: 100dvh;
+    height: 100%;
+    border-radius: 0;
+    padding: 18px 16px;
+  }
+
+  .gallery-main-view {
+    height: 230px;
+  }
+
+  .newsletter-form button {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .footer-bottom-bar {
+    font-size: 0.75rem;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .featured-card:hover,
+  .property-card:hover {
+    transform: none;
+  }
+}
