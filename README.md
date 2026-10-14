@@ -105,14 +105,10 @@ valois-and-co/
 1. Clone this repository:
 
    ```bash
-   git clone YOUR_GITHUB_REPOSITORY_URL
+   git clone https://github.com/qbtechstudio/valois-and-co
    ```
 
 2. Navigate to the project directory:
-
-   ```bash
-   cd valois-and-co
-   ```
 
 3. Open `index.html` in your browser.
 
